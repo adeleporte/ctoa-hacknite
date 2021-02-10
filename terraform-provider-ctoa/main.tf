@@ -1,7 +1,7 @@
 terraform {
   required_providers {
     ctoa = {
-      source  = "adeleporte.com/edu/ctoa"
+      source  = "vmware.com/edu/ctoa"
     }
   }
 }
@@ -11,12 +11,18 @@ provider "ctoa" {
 }
 
 
-resource "ctoa_people" "deleporte" {
+resource "ctoa_people" "johnsmith" {
+  first_name = "John"
+  last_name = "Smith"
+}
+
+/*
+resource "ctoa_people" "adeleporte" {
   first_name = "Antoine"
   last_name = "Deleporte"
 }
 
-/*
+
 resource "ctoa_people" "nvibert" {
   first_name = "Nico"
   last_name = "Vibert"

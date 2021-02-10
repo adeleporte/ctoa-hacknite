@@ -36,7 +36,7 @@ func resourcePeopleCreate(ctx context.Context, d *schema.ResourceData, m interfa
 		LastName:  d.Get("last_name").(string),
 	}
 
-	id, err := InsertCtoa(client, ctoa)
+	id, err := CreateCtoa(client, ctoa)
 	if err != nil {
 		return diags
 	}

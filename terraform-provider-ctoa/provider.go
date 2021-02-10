@@ -21,8 +21,6 @@ func Provider() *schema.Provider {
 		},
 		DataSourcesMap: map[string]*schema.Resource{
 			//"ctoa_people": dataSourcePeople(),
-			//"hashicups_ingredients": dataSourceIngredients(),
-			//"hashicups_order":       dataSourceOrder(),
 		},
 		ConfigureContextFunc: providerConfigure,
 	}
@@ -30,18 +28,11 @@ func Provider() *schema.Provider {
 
 func providerConfigure(ctx context.Context, d *schema.ResourceData) (interface{}, diag.Diagnostics) {
 
-	var host *string
-
-	hVal, ok := d.GetOk("host")
-	if ok {
-		tempHost := hVal.(string)
-		host = &tempHost
-	}
-
-	// Warning or errors can be collected in a slice type
 	var diags diag.Diagnostics
 
-	c, err := NewClient(host)
+	host := d.Get("host").(string)
+	c, err := NewClient(&host)
+
 	if err != nil {
 		diags = append(diags, diag.Diagnostic{
 			Severity: diag.Error,

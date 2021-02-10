@@ -7,7 +7,7 @@ import (
 	"net/http"
 )
 
-func InsertCtoa(c *Client, ctoa Ctoa) (string, error) {
+func CreateCtoa(c *Client, ctoa Ctoa) (string, error) {
 
 	resp := Ctoa{}
 
