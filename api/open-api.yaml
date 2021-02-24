@@ -79,7 +79,7 @@ paths:
                 $ref: '#/components/schemas/Ctoa'
     delete:
       summary: 'Delete a particular Ctoa'
-      operationId: updateCtoa
+      operationId: deleteCtoa
       parameters:
           - in: path
             name: id
