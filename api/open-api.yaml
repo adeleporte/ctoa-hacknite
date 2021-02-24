@@ -1,0 +1,151 @@
+openapi: 3.0.0
+info:
+  version: 1.0.0
+  title: ctoa
+servers:
+  - url: 'http://localhost/api'
+paths:
+  /ctoa:
+    get:
+      summary: 'Returns list of Ctoas'
+      operationId: listCtoa
+      responses:
+        '500':
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '200':
+          description: 'Sample response: Array of Ctoas'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ArrayofCtoa'      
+    post:
+      summary: 'Create a particular Ctoa'
+      operationId: createCtoa
+      requestBody:
+        content:
+          application/json:
+              schema:
+                $ref: '#/components/schemas/NewCtoa'
+      responses:
+        '500':
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '200':
+          description: 'Sample response: Ctoa'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Ctoa'
+  /ctoa/{id}:
+    put:
+      summary: 'Update a particular Ctoa'
+      operationId: updateCtoa
+      parameters:
+          - in: path
+            name: id
+            schema:
+              type: integer
+            required:
+              true
+            description: Numeric ID of the CTOA
+      requestBody:
+        content:
+          application/json:
+              schema:
+                $ref: '#/components/schemas/Ctoa'
+                required:
+                    - id
+                    - last_name
+                    - first_name
+      responses:
+        '500':
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '200':
+          description: 'Sample response: Ctoa'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Ctoa'
+    delete:
+      summary: 'Delete a particular Ctoa'
+      operationId: updateCtoa
+      parameters:
+          - in: path
+            name: id
+            schema:
+              type: integer
+            required:
+              true
+            description: Numeric ID of the CTOA
+      responses:
+        '500':
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '200':
+          description: 'Sample response: Ctoa'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Ctoa'
+components:
+  schemas:
+    NewCtoa:
+      type: object
+      required:
+        - last_name
+        - first_name
+      properties:
+        last_name:
+          type: string
+        first_name:
+          type: string
+    Ctoa:
+      type: object
+      required:
+        - last_name
+        - first_name
+      properties:
+        id:
+          type: integer
+          format: int64
+        last_name:
+          type: string
+        first_name:
+          type: string
+    ArrayofCtoa:
+      type: array
+      items:
+        type: object
+        required:
+          - last_name
+          - first_name
+        properties:
+          id:
+            type: integer
+            format: int64
+          last_name:
+            type: string
+          first_name:
+            type: string
+    Error:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int32
+        message:
+          type: string
